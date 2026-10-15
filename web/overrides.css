@@ -1,0 +1,34 @@
+.result-summary{color:#52635a;font-size:12px;line-height:1.7;margin:0 0 10px}
+.validation-note{font:10px var(--mono);color:#51745d;margin:10px 0 0}
+.stage.skipped{background:#f7f8f7;border-style:dashed}
+.stage.skipped small{color:#9ca79f}
+.stage.reused{background:#eff5f0}
+.stage.reused small{color:#567a62}
+.finding-company{font-size:11px;margin-top:3px}
+.availability-button{width:100%;height:37px;margin-top:12px}
+.availability-results{display:grid;gap:7px;color:#77847b;font-size:10px}
+.availability-results.error{color:#b34040;background:#fff4f3;padding:9px;border-radius:7px}
+.availability-card{border:1px solid #e7ece8;border-radius:7px;padding:9px 10px;background:#f9fbf9}
+.availability-card strong{font-size:10px;color:#42544a}
+.availability-card p{margin:4px 0 0;font-size:9px}
+.availability-card a{color:#267051;text-decoration:none}
+.availability-card a:hover{text-decoration:underline}
+.availability-note{color:#997128;background:#fff8eb;padding:7px 9px;border-radius:6px}
+.download-group{display:flex;gap:8px;flex-wrap:wrap}
+.chart-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.chart-card{border:1px solid #e5ece6;border-radius:9px;background:#fbfcfb;padding:12px;min-width:0}
+.chart-card strong{display:block;color:#405348;font-size:10px;margin-bottom:7px}
+.chart-card svg{display:block;width:100%;height:auto;overflow:visible}
+.chart-card svg text{font:9px var(--mono);fill:#829087}
+.chart-card svg rect{transition:opacity .15s}
+.chart-card svg rect:hover{opacity:.76}
+@media(max-width:620px){.chart-grid{grid-template-columns:1fr}.download-group{width:100%}}
+.review-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.review-group{border:1px solid #e5ece6;border-radius:9px;background:#fbfcfb;padding:12px;min-width:0}
+.review-group h4{font:700 11px var(--display);color:#405348;margin:0 0 8px}
+.review-item{border-top:1px solid #e9eeea;padding:8px 0}
+.review-item:first-of-type{border-top:0}
+.review-item strong{display:block;font-size:10px;color:#405348;overflow-wrap:anywhere}
+.review-item p{font-size:10px;line-height:1.5;color:#66746b;margin:4px 0}
+.review-item a{font:9px var(--mono);color:#287255}
+@media(max-width:620px){.review-grid{grid-template-columns:1fr}}

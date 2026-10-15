@@ -1,0 +1,13 @@
+__pycache__/
+*.py[cod]
+.venv/
+.env
+data/cache/
+data/meridian.sqlite3*
+uploads/
+models/cache/
+tools/tesseract/
+tests/.tmp/
+.tmp/
+*.log
+

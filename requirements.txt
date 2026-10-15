@@ -1,0 +1,6 @@
+# PDF extraction/export and local pretrained semantic embeddings.
+pypdf>=5.0,<7
+reportlab>=4.2,<5
+sentence-transformers>=5.7,<7
+httpx>=0.27,<1
+

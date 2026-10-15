@@ -1,0 +1,82 @@
+{
+  "name": "meridian-grounding-fixtures-v1",
+  "composition": {
+    "risk_disclosure": 2,
+    "management_strategy": 1,
+    "financial_table": 1,
+    "difficult_retrieval": 1
+  },
+  "cases": [
+    {
+      "id": "risk-cybersecurity",
+      "query": "What cybersecurity and privacy risks are disclosed?",
+      "k": 2,
+      "expected_evidence_ids": ["r1"],
+      "passages": [
+        {"id": "r1", "content": "The company may experience cybersecurity incidents, including unauthorized access to customer information and disruption of operations."},
+        {"id": "r2", "content": "Revenue increased as demand for the new product grew."},
+        {"id": "r3", "content": "Management expects to expand manufacturing capacity during the next fiscal year."}
+      ],
+      "claims": [
+        {"id": "c1", "evidence_id": "r1", "quote": "cybersecurity incidents, including unauthorized access to customer information"},
+        {"id": "c2", "evidence_id": "r2", "quote": "The company has no cybersecurity exposure."}
+      ]
+    },
+    {
+      "id": "risk-litigation",
+      "query": "Which legal proceedings or regulatory investigations are disclosed?",
+      "k": 2,
+      "expected_evidence_ids": ["l1"],
+      "passages": [
+        {"id": "l1", "content": "The company is responding to a regulatory inquiry and is party to ordinary-course litigation."},
+        {"id": "l2", "content": "Cash and cash equivalents were 2,400 million dollars at year end."},
+        {"id": "l3", "content": "Our strategy focuses on cloud services and new product development."}
+      ],
+      "claims": [
+        {"id": "c3", "evidence_id": "l1", "quote": "responding to a regulatory inquiry"}
+      ]
+    },
+    {
+      "id": "strategy-capex",
+      "query": "What capital expenditure plans and investments did management disclose?",
+      "k": 2,
+      "expected_evidence_ids": ["s1"],
+      "passages": [
+        {"id": "s1", "content": "Management plans capital expenditures to build additional data center capacity over the next two years."},
+        {"id": "s2", "content": "The company faces competition from several global providers."},
+        {"id": "s3", "content": "The board declared a quarterly dividend."}
+      ],
+      "claims": [
+        {"id": "c4", "evidence_id": "s1", "quote": "plans capital expenditures to build additional data center capacity"}
+      ]
+    },
+    {
+      "id": "financial-fcf",
+      "query": "Find operating cash flow and capital expenditures for calculating free cash flow.",
+      "k": 2,
+      "expected_evidence_ids": ["f1", "f2"],
+      "passages": [
+        {"id": "f1", "content": "Net cash provided by operating activities: 18,200 USD million for FY2025."},
+        {"id": "f2", "content": "Payments to acquire property and equipment: 4,300 USD million for FY2025."},
+        {"id": "f3", "content": "The company sells consumer products through retail stores."}
+      ],
+      "claims": [
+        {"id": "c5", "evidence_id": "f1", "quote": "Net cash provided by operating activities: 18,200 USD million"}
+      ]
+    },
+    {
+      "id": "hard-alias-table",
+      "query": "What debt balance did the company disclose in its consolidated balance sheet?",
+      "k": 2,
+      "expected_evidence_ids": ["d1"],
+      "passages": [
+        {"id": "d1", "content": "Consolidated balance sheets | Long-term debt | 9,700 | USD millions | FY2025"},
+        {"id": "d2", "content": "The company maintains supplier relationships in multiple regions."},
+        {"id": "d3", "content": "The company announced an updated product roadmap."}
+      ],
+      "claims": [
+        {"id": "c6", "evidence_id": "d1", "quote": "Long-term debt | 9,700 | USD millions"}
+      ]
+    }
+  ]
+}

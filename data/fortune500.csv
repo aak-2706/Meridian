@@ -1,0 +1,13 @@
+company_name,ticker,cik,rank,reporting_year,industry,aliases,source_url
+Amazon,AMZN,1018724,1,2026,Internet services and retailing,Amazon.com,https://fortune.com/ranking/fortune500/2026/explore/
+Walmart,WMT,104169,2,2026,General merchandisers,Wal-Mart Stores,https://fortune.com/ranking/fortune500/2026/explore/
+UnitedHealth Group,UNH,731766,3,2026,Health care insurance and managed care,UnitedHealth,https://fortune.com/ranking/fortune500/2026/explore/
+Apple,AAPL,320193,4,2026,Computers and office equipment,,https://fortune.com/ranking/fortune500/2026/explore/
+Alphabet,GOOGL,1652044,5,2026,Internet services and retailing,Google,https://fortune.com/ranking/fortune500/2026/explore/
+CVS Health,CVS,64803,6,2026,Health care pharmacy and services,CVS,https://fortune.com/ranking/fortune500/2026/explore/
+Berkshire Hathaway,BRK-B,1067983,7,2026,Insurance and diversified holdings,Berkshire,https://fortune.com/ranking/fortune500/2026/explore/
+McKesson,MCK,927653,8,2026,Health care wholesalers,,https://fortune.com/ranking/fortune500/2026/explore/
+Exxon Mobil Holdings,XOM,34088,9,2026,Petroleum refining,ExxonMobil|Exxon Mobil,https://fortune.com/ranking/fortune500/2026/explore/
+Cencora,COR,1140859,10,2026,Health care wholesalers,AmerisourceBergen,https://fortune.com/ranking/fortune500/2026/explore/
+Microsoft,MSFT,789019,11,2026,Computer software,,https://fortune.com/ranking/fortune500/2026/explore/
+JPMorgan Chase,JPM,19617,12,2026,Financials,JPMorgan|JPMorgan Chase & Co,https://fortune.com/ranking/fortune500/2026/explore/

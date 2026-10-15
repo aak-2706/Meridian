@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Meridian — Equity Research</title>
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="stylesheet" href="/overrides.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="/"><span class="brand-mark">M</span><span>meridian<small>Evidence-led equity research</small></span></a>
+    <div class="header-meta"><span class="live-dot"></span><span id="health-label">Connecting to local research engine</span></div>
+  </header>
+  <main class="shell">
+    <section class="hero">
+      <div>
+        <div class="eyebrow">COMPARATIVE COMPANY ANALYSIS</div>
+        <h1>Research that shows its work.</h1>
+        <p>Compare two companies across SEC filings and uploaded documents. Every reported finding links back to the evidence used.</p>
+      </div>
+      <div class="hero-aside"><span class="hero-number">01</span><span>Choose companies<br>and a reporting period</span></div>
+    </section>
+
+    <section class="notice hidden" id="setup-notice"></section>
+
+    <section class="workspace-grid">
+      <section class="panel setup-panel">
+        <div class="panel-heading"><div><span class="step-tag">RESEARCH SETUP</span><h2>Build a comparison</h2></div><span class="panel-icon">↗</span></div>
+        <form id="research-form">
+          <div class="company-grid">
+            <label class="field"><span>Company one</span><div class="input-with-mark"><input id="company-one" list="company-options-one" autocomplete="off" placeholder="Search name or ticker" required><i>A</i></div><datalist id="company-options-one"></datalist><small id="company-one-meta">Search the configured company universe</small></label>
+            <div class="versus">VS</div>
+            <label class="field"><span>Company two</span><div class="input-with-mark"><input id="company-two" list="company-options-two" autocomplete="off" placeholder="Search name or ticker" required><i>B</i></div><datalist id="company-options-two"></datalist><small id="company-two-meta">Select a different company</small></label>
+          </div>
+          <div class="period-row">
+            <label class="field"><span>From fiscal year</span><input id="year-from" type="number" min="1990" max="2030" value="2025" required></label>
+            <span class="period-arrow">→</span>
+            <label class="field"><span>Through fiscal year</span><input id="year-to" type="number" min="1990" max="2030" value="2025" required></label>
+          </div>
+          <div class="field"><span>Documents to include</span>
+            <div class="choice-row">
+              <label class="check"><input type="checkbox" name="doctype" value="10-K" checked><span>10-K</span></label>
+              <label class="check"><input type="checkbox" name="doctype" value="10-Q"><span>10-Q</span></label>
+              <label class="check"><input type="checkbox" name="doctype" value="transcript"><span>Call transcript</span></label>
+            </div>
+            <small>Transcripts require upload; no transcript provider is configured.</small>
+          </div>
+          <button class="button secondary availability-button" id="check-filings" type="button">Check SEC filing availability <b>⌕</b></button>
+          <div id="availability-results" class="availability-results" aria-live="polite"></div>
+          <label class="toggle-line"><input id="fetch-sec" type="checkbox" checked><span class="toggle-ui"></span><span>Discover and retrieve available SEC filings automatically</span></label>
+          <label class="toggle-line"><input id="fast-demo" type="checkbox"><span class="toggle-ui"></span><span>Fast presentation run (use saved filings only)</span></label>
+          <small class="fast-demo-note">Leave this off for one run to cache SEC facts; saved filings are reused automatically. Later, turn it on for no-network demos. Missing cached facts stay unavailable.</small>
+          <div class="form-error" id="form-error" role="alert"></div>
+          <button class="button primary" id="start-button" type="submit"><span>Generate research memo</span><b>→</b></button>
+          <p class="fineprint">Evidence coverage is checked before synthesis. Missing documents stay visible in the final memo.</p>
+        </form>
+      </section>
+
+      <aside class="panel side-panel">
+        <div class="panel-heading"><div><span class="step-tag">SOURCE COVERAGE</span><h2>Prepare documents</h2></div><span class="panel-icon">▤</span></div>
+        <p class="muted">Upload a filing or earnings-call transcript when automatic discovery is unavailable.</p>
+        <form id="upload-form" class="upload-form">
+          <label class="field"><span>Company</span><select id="upload-company" required><option value="">Choose from comparison universe</option></select></label>
+          <div class="two-fields">
+            <label class="field"><span>Document type</span><select id="upload-type"><option value="10-K">10-K</option><option value="10-Q">10-Q</option><option value="annual_report">Annual report</option><option value="transcript">Earnings transcript</option><option value="other">Other disclosure</option></select></label>
+            <label class="field"><span>Fiscal period</span><input id="upload-period" value="FY2025" placeholder="FY2025" required></label>
+          </div>
+          <label class="field"><span>Document file</span><input id="upload-file" type="file" accept=".pdf,.html,.htm,.txt,.xhtml" required></label>
+          <button class="button secondary" type="submit">Upload and index <b>＋</b></button>
+          <div class="upload-result" id="upload-result" aria-live="polite"></div>
+        </form>
+        <div class="coverage-card"><div class="coverage-icon">i</div><div><strong id="universe-title">Fortune 500 universe</strong><p id="universe-info">Loading ranking source…</p></div></div>
+        <section class="cache-prep">
+          <div class="cache-prep-heading"><span class="step-tag">BEFORE YOUR DEMO</span><strong>Prepare fast comparisons</strong></div>
+          <div style="display: flex; gap: 0.5rem; align-items: center;">
+            <button class="button secondary" id="warm-cache-button" type="button">Prepare company cache</button>
+            <button class="button secondary hidden" id="cancel-warm-cache-button" type="button" style="background: #fff0f0; border-color: #ffcccc; color: #c00;">Cancel preparation</button>
+          </div>
+          <div class="cache-progress" id="cache-progress" aria-live="polite"></div>
+          <small>This initial bulk preparation can take a long time and use substantial disk space. Keep Meridian open and connected to the internet until it completes. A fresh-data run still takes longer; Fast mode uses the saved 10-Ks and facts.</small>
+        </section>
+        <details class="universe-import"><summary>Refresh the company universe</summary>
+          <p>Import your licensed Fortune ranking CSV with company name, ticker, SEC CIK, rank, and reporting year columns.</p>
+          <form id="universe-form"><input type="file" id="universe-file" accept=".csv" required><input id="universe-source" placeholder="Ranking source URL (optional)"><button class="button secondary" type="submit">Import CSV</button></form>
+          <div id="universe-result" class="upload-result"></div>
+        </details>
+      </aside>
+    </section>
+
+    <section class="panel progress-panel hidden" id="progress-panel">
+      <div class="panel-heading"><div><span class="step-tag">LIVE PIPELINE</span><h2 id="progress-title">Preparing your research run</h2></div><span class="run-state" id="run-state">QUEUED</span></div>
+      <div class="progress-track"><div id="progress-bar"></div></div>
+      <div class="stage-grid" id="stage-grid"></div>
+      <div class="pipeline-message" id="pipeline-message"></div>
+    </section>
+
+    <section class="results hidden" id="results">
+      <div class="results-top"><div><span class="step-tag">RESEARCH OUTPUT</span><h2 id="result-title">Comparative memo</h2><p id="result-subtitle"></p></div><div class="download-group"><a class="button secondary download" id="download-link" href="#" download>Markdown <span>↓</span></a><a class="button secondary download" id="download-pdf-link" href="#" download>PDF <span>↓</span></a></div></div>
+      <div class="result-grid">
+        <article class="panel result-card wide"><div class="panel-heading"><div><span class="step-tag">EXECUTIVE SUMMARY</span><h3>What this evidence supports</h3></div></div><p id="executive-summary" class="result-summary"></p><p id="comparative-assessment" class="result-summary muted"></p><p id="claim-validation" class="validation-note"></p></article>
+        <article class="panel result-card wide"><div class="panel-heading"><div><span class="step-tag">FINANCIAL TRENDS</span><h3>Reported revenue by fiscal year</h3></div></div><div id="financial-charts" class="chart-grid"></div><p class="fineprint">Each company is charted in its reported currency. Missing facts are omitted and currencies are not mixed on one scale.</p></article>
+        <article class="panel result-card wide"><div class="panel-heading"><div><span class="step-tag">FINANCIAL COMPARISON</span><h3>Reported metrics</h3></div></div><div class="table-wrap"><table id="financial-table"><thead><tr><th>Company</th><th>Period</th><th>Metric</th><th>Value</th><th>Calculation or source tag</th><th>Evidence</th></tr></thead><tbody></tbody></table></div></article>
+        <article class="panel result-card wide"><div class="panel-heading"><div><span class="step-tag">ANALYST REVIEW</span><h3>Accounting and claim review queue</h3></div><span class="fixture-tag">CANDIDATES · HUMAN REVIEW REQUIRED</span></div><p id="analyst-review-summary" class="fineprint"></p><div id="analyst-review-queue" class="review-grid"></div></article>
+        <article class="panel result-card"><div class="panel-heading"><div><span class="step-tag">RISK AGENT</span><h3>Risk disclosures</h3></div></div><div id="risk-findings" class="finding-list"></div></article>
+        <article class="panel result-card"><div class="panel-heading"><div><span class="step-tag">STRATEGY AGENT</span><h3>Plans and outlook</h3></div></div><div id="strategy-findings" class="finding-list"></div></article>
+        <article class="panel result-card wide"><div class="panel-heading"><div><span class="step-tag">EVIDENCE REGISTER</span><h3>Sources and limitations</h3></div></div><div id="coverage-list" class="coverage-list"></div><details class="evidence-details"><summary>Inspect retrieved evidence</summary><div id="evidence-list"></div></details></article>
+        <article class="panel result-card wide"><div class="panel-heading"><div><span class="step-tag">OBSERVABILITY</span><h3>Execution trace</h3></div></div><div class="trace-table-wrap"><table id="trace-table"><thead><tr><th>Stage</th><th>Agent</th><th>Status</th><th>Latency</th><th>Details</th></tr></thead><tbody></tbody></table></div></article>
+        <article class="panel result-card wide"><div class="panel-heading"><div><span class="step-tag">RELIABILITY EVALUATION</span><h3>Measured fixture results</h3></div><span class="fixture-tag">DETERMINISTIC FIXTURE SET</span></div><div id="evaluation-results" class="evaluation-grid"></div><p id="evaluation-method" class="fineprint"></p></article>
+      </div>
+    </section>
+
+    <footer><span>MERIDIAN <i>•</i> LOCAL RESEARCH WORKSPACE</span><span>Source links and evidence IDs are retained with each finding.</span></footer>
+  </main>
+  <script src="/app.js" defer></script>
+</body>
+</html>
